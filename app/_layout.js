@@ -28,7 +28,7 @@ function RootLayoutNav() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       {isLoggedIn ? (
-        <Stack.Screen name="(app)" />
+        <Stack.Screen name="(tabs)" />
       ) : (
         <Stack.Screen name="(auth)" />
       )}

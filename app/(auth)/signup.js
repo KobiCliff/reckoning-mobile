@@ -17,7 +17,7 @@ export default function SignupScreen() {
         }
         try {
             await signup(email, password, phone);
-            router.replace('/(app)/home');
+            router.replace('/(tabs)/home');
         } catch (err) {
             Alert.alert('Signup Failed', err);
         }
