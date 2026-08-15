@@ -1,10 +1,11 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_BASE_URL = '10.182.19.97';
+const API_BASE_URL = 'http://localhost:1000';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
+    timeout: 10000,
 });
 
 api.interceptors.request.use(async (config) =>{
@@ -14,5 +15,13 @@ api.interceptors.request.use(async (config) =>{
     }
     return config;
 });
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        console.log('API Error:', error.message);
+        return Promise.reject(error);
+    }
+);
 
 export default api;
