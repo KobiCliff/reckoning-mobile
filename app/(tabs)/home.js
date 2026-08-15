@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from "react-native";
 import { useRouter } from "expo-router";
-import { AuthContext } from "../../src/context/AuthContext";
 import { getWallet, getGoals, submitReport } from '../../src/api/goals'
 
 export default function HomeScreen() {
-    const { logout } = useContext(AuthContext);
     const router = useRouter();
     const [wallet, setWallet] = useState(null);
     const [goals, setGoals] = useState([]);
@@ -39,11 +37,6 @@ export default function HomeScreen() {
             Alert.alert('Error', err.response?.data?.error || 'Failed to submit');
         }
     }
-
-    const handleLogout = async () => {
-        await logout();
-        router.replace('/(auth)/login');
-    };
 
     return (
         <ScrollView style={styles.container}>
@@ -83,10 +76,6 @@ export default function HomeScreen() {
                     ))
                 )}
             </View>
-
-            <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
-                <Text style={styles.logoutBtnText}>Logout</Text>
-            </TouchableOpacity>
         </ScrollView>
     );
 }
@@ -182,7 +171,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#991b1b1',
         color: '#fca5a5',
         paddingHorizontal: 10,
-        paddingVartical: 4,
+        paddingVertical: 4,
         borderRadius: 6,
         fontSize: 11,
         fontWeight: '700',
@@ -202,16 +191,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '700',
         fontSize: 13,
-    },
-    logoutBtn: {
-        backgroundColor: '#991b1b',
-        paddingVertical: 14,
-        borderRadius: 8,
-        marginVertical: 20,
-    },
-    logoutBtnText: {
-        color: '#e8e8e8',
-        textAlign:'center',
-        fontWeight: '700',
     },
 });
